@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WealthBuilder Hub - Your Financial Growth Partner</title>
+    <meta name="description" content="Free financial calculators, investment guides, and tools to help you build wealth. Emergency fund calculator, compound interest calculator, and more.">
+    <style>
+        :root {
+            --color-cream-50: rgba(252, 252, 249, 1);
+            --color-cream-100: rgba(255, 255, 253, 1);
+            --color-gray-200: rgba(245, 245, 245, 1);
+            --color-gray-300: rgba(167, 169, 169, 1);
+            --color-slate-500: rgba(98, 108, 113, 1);
+            --color-brown-600: rgba(94, 82, 64, 1);
+            --color-charcoal-700: rgba(31, 33, 33, 1);
+            --color-charcoal-800: rgba(38, 40, 40, 1);
+            --color-slate-900: rgba(19, 52, 59, 1);
+            --color-teal-300: rgba(50, 184, 198, 1);
+            --color-teal-500: rgba(33, 128, 141, 1);
+            --color-teal-600: rgba(29, 116, 128, 1);
+            --color-teal-700: rgba(26, 104, 115, 1);
+            --color-brown-600-rgb: 94, 82, 64;
+            --color-teal-500-rgb: 33, 128, 141;
+            --color-slate-900-rgb: 19, 52, 59;
+            --color-background: var(--color-cream-50);
+            --color-surface: var(--color-cream-100);
+            --color-text: var(--color-slate-900);
+            --color-text-secondary: var(--color-slate-500);
+            --color-primary: var(--color-teal-500);
+            --color-primary-hover: var(--color-teal-600);
+            --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+            --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+            --font-size-base: 14px;
+            --font-size-lg: 16px;
+            --font-size-xl: 18px;
+            --font-size-2xl: 20px;
+            --font-size-3xl: 24px;
+            --font-size-4xl: 30px;
+            --space-8: 8px;
+            --space-12: 12px;
+            --space-16: 16px;
+            --space-20: 20px;
+            --space-24: 24px;
+            --space-32: 32px;
+            --space-48: 48px;
+            --radius-base: 8px;
+            --radius-lg: 12px;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-background: var(--color-charcoal-700);
+                --color-surface: var(--color-charcoal-800);
+                --color-text: var(--color-gray-200);
+                --color-text-secondary: rgba(167, 169, 169, 0.7);
+                --color-primary: var(--color-teal-300);
+                --color-border: rgba(119, 124, 124, 0.3);
+                --color-card-border: rgba(119, 124, 124, 0.2);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--color-background);
+            color: var(--color-text);
+            line-height: 1.6;
+            font-size: var(--font-size-base);
+        }
+
+        .header {
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-border);
+            padding: var(--space-16) var(--space-24);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            color: var(--color-primary);
+        }
+
+        nav a {
+            margin-left: var(--space-24);
+            text-decoration: none;
+            color: var(--color-text);
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--color-primary);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-24);
+        }
+
+        .hero {
+            text-align: center;
+            padding: var(--space-48) var(--space-24);
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-32);
+        }
+
+        .hero h1 {
+            font-size: var(--font-size-4xl);
+            margin-bottom: var(--space-16);
+            color: var(--color-text);
+        }
+
+        .hero p {
+            font-size: var(--font-size-lg);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-32);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: var(--space-16);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: var(--space-12) var(--space-24);
+            border-radius: var(--radius-base);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            font-size: var(--font-size-base);
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--color-border);
+            color: var(--color-text);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(var(--color-teal-500-rgb), 0.1);
+        }
+
+        .section {
+            margin-bottom: var(--space-48);
+        }
+
+        .section-title {
+            font-size: var(--font-size-3xl);
+            margin-bottom: var(--space-24);
+            color: var(--color-text);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-24);
+        }
+
+        .card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-24);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--space-12);
+            color: var(--color-text);
+        }
+
+        .card p {
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-16);
+        }
+
+        .calculator {
+            background: var(--color-surface);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-32);
+            margin-bottom: var(--space-24);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-20);
+        }
+
+        label {
+            display: block;
+            margin-bottom: var(--space-8);
+            font-weight: 500;
+            color: var(--color-text);
+        }
+
+        input, select {
+            width: 100%;
+            padding: var(--space-12);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-base);
+            background: var(--color-background);
+            color: var(--color-text);
+            font-size: var(--font-size-base);
+        }
+
+        .result {
+            background: rgba(var(--color-teal-500-rgb), 0.1);
+            border: 1px solid var(--color-primary);
+            border-radius: var(--radius-base);
+            padding: var(--space-20);
+            margin-top: var(--space-24);
+            display: none;
+        }
+
+        .result h3 {
+            color: var(--color-primary);
+            margin-bottom: var(--space-12);
+        }
+
+        .ad-placeholder {
+            background: linear-gradient(135deg, rgba(var(--color-teal-500-rgb), 0.05), rgba(var(--color-teal-500-rgb), 0.1));
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-24);
+            text-align: center;
+            color: var(--color-text-secondary);
+            margin: var(--space-32) 0;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ad-placeholder::before {
+            content: '📢';
+            font-size: 32px;
+            opacity: 0.3;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+
+        .ad-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-text-secondary);
+            opacity: 0.6;
+            margin-bottom: 8px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-16);
+            margin: var(--space-32) 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, var(--color-surface), rgba(var(--color-teal-500-rgb), 0.05));
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-24);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: var(--font-size-4xl);
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: var(--space-8);
+        }
+
+        .stat-label {
+            font-size: var(--font-size-base);
+            color: var(--color-text-secondary);
+        }
+
+        .trust-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-8);
+            background: rgba(var(--color-teal-500-rgb), 0.1);
+            border: 1px solid var(--color-primary);
+            border-radius: var(--radius-base);
+            padding: var(--space-8) var(--space-16);
+            font-size: 13px;
+            color: var(--color-primary);
+            font-weight: 500;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features-list li {
+            padding: var(--space-12) 0;
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            gap: var(--space-12);
+        }
+
+        .features-list li:last-child {
+            border-bottom: none;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            color: var(--color-primary);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .blog-post {
+            background: var(--color-surface);
+            border: 1px solid var(--color-card-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-24);
+            margin-bottom: var(--space-24);
+        }
+
+        .blog-post h3 {
+            font-size: var(--font-size-2xl);
+            margin-bottom: var(--space-12);
+        }
+
+        .blog-post h3 a {
+            color: var(--color-text);
+            text-decoration: none;
+        }
+
+        .blog-post h3 a:hover {
+            color: var(--color-primary);
+        }
+
+        .footer {
+            background: var(--color-surface);
+            border-top: 1px solid var(--color-border);
+            padding: var(--space-32) var(--space-24);
+            margin-top: var(--space-48);
+            text-align: center;
+            color: var(--color-text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: var(--font-size-3xl);
+            }
+            nav {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">💰 WealthBuilder Hub</div>
+            <nav>
+                <a href="#calculators">Calculators</a>
+                <a href="#guides">Guides</a>
+                <a href="#blog">Blog</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="hero">
+            <h1>Build Wealth with Smart Financial Tools</h1>
+            <p>Free calculators, expert guides, and actionable insights to help you achieve financial freedom</p>
+            <div class="cta-buttons">
+                <a href="https://zerodha.com/open-account?c=YOUR_REFERRAL_CODE" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open Free Demat Account</a>
+                <a href="#calculators" class="btn btn-secondary">Try Our Calculators</a>
+            </div>
+        </div>
+
+        <!-- Statistics Section -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">10K+</div>
+                <div class="stat-label">Active Users</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">₹50Cr+</div>
+                <div class="stat-label">Wealth Managed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">15%</div>
+                <div class="stat-label">Avg. Annual Returns</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Free Tools</div>
+            </div>
+        </div>
+
+        <!-- Ad Space -->
+        <div class="ad-placeholder">
+            <div>
+                <div class="ad-label">Advertisement</div>
+                <div style="min-height: 90px; display: flex; align-items: center; justify-content: center;">
+                    <p style="margin: 0; font-size: 13px;">Google AdSense 728×90 Banner</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculators Section -->
+        <section class="section" id="calculators">
+            <h2 class="section-title">Financial Calculators</h2>
+            
+            <!-- Emergency Fund Calculator -->
+            <div class="calculator">
+                <h3>Emergency Fund Calculator</h3>
+                <p>Calculate how much you need in your emergency fund based on your monthly expenses</p>
+                <div class="form-group">
+                    <label for="monthlyExpenses">Monthly Expenses (₹)</label>
+                    <input type="number" id="monthlyExpenses" placeholder="50000">
+                </div>
+                <div class="form-group">
+                    <label for="months">Number of Months to Cover</label>
+                    <select id="months">
+                        <option value="3">3 months</option>
+                        <option value="6" selected>6 months</option>
+                        <option value="9">9 months</option>
+                        <option value="12">12 months</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary" onclick="calculateEmergencyFund()">Calculate</button>
+                <div id="emergencyResult" class="result">
+                    <h3>Your Emergency Fund Target</h3>
+                    <p id="emergencyAmount"></p>
+                </div>
+            </div>
+
+            <!-- Compound Interest Calculator -->
+            <div class="calculator">
+                <h3>Compound Interest Calculator</h3>
+                <p>See how your investments can grow over time with compound interest</p>
+                <div class="form-group">
+                    <label for="principal">Initial Investment (₹)</label>
+                    <input type="number" id="principal" placeholder="100000">
+                </div>
+                <div class="form-group">
+                    <label for="monthlyInvest">Monthly Investment (₹)</label>
+                    <input type="number" id="monthlyInvest" placeholder="5000">
+                </div>
+                <div class="form-group">
+                    <label for="rate">Expected Annual Return (%)</label>
+                    <input type="number" id="rate" placeholder="12" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label for="years">Investment Period (Years)</label>
+                    <input type="number" id="years" placeholder="10">
+                </div>
+                <button class="btn btn-primary" onclick="calculateCompound()">Calculate</button>
+                <div id="compoundResult" class="result">
+                    <h3>Investment Growth Summary</h3>
+                    <p id="totalInvested"></p>
+                    <p id="totalValue"></p>
+                    <p id="totalGains"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ad Space -->
+        <div class="ad-placeholder">
+            <div>
+                <div class="ad-label">Advertisement</div>
+                <div style="min-height: 90px; display: flex; align-items: center; justify-content: center;">
+                    <p style="margin: 0; font-size: 13px;">Advertisement Space 728×90</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trading Platforms -->
+        <section class="section">
+            <h2 class="section-title">Best Trading Platforms 2025</h2>
+            <div style="margin-bottom: var(--space-24); display: flex; gap: var(--space-12); flex-wrap: wrap;">
+                <span class="trust-badge">🔒 100% Secure</span>
+                <span class="trust-badge">📱 Mobile Ready</span>
+                <span class="trust-badge">🏆 SEBI Registered</span>
+            </div>
+            <div class="grid">
+                <div class="card">
+                    <h3>🥇 Zerodha</h3>
+                    <p>India's largest broker with ₹0 brokerage on investments and lowest charges on trading</p>
+                    <ul class="features-list" style="margin: var(--space-16) 0;">
+                        <li>Zero brokerage on delivery</li>
+                        <li>₹20 per trade for intraday</li>
+                        <li>Advanced trading tools</li>
+                    </ul>
+                    <a href="https://zerodha.com/open-account?c=YOUR_REFERRAL_CODE" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%;">Open Free Account →</a>
+                </div>
+                <div class="card">
+                    <h3>🚀 Groww</h3>
+                    <p>Simple and beginner-friendly platform for stocks, mutual funds, and IPOs</p>
+                    <ul class="features-list" style="margin: var(--space-16) 0;">
+                        <li>Easy to use interface</li>
+                        <li>Zero account opening fees</li>
+                        <li>Direct mutual funds</li>
+                    </ul>
+                    <a href="https://groww.in" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%;">Get Started →</a>
+                </div>
+                <div class="card">
+                    <h3>⚡ Upstox</h3>
+                    <p>Low-cost trading with advanced tools and analytics for serious traders</p>
+                    <ul class="features-list" style="margin: var(--space-16) 0;">
+                        <li>₹20 flat per trade</li>
+                        <li>Pro trading platform</li>
+                        <li>Real-time market data</li>
+                    </ul>
+                    <a href="https://upstox.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width: 100%;">Join Now →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section class="section" id="blog">
+            <h2 class="section-title">Latest Financial Guides</h2>
+            
+            <div class="blog-post">
+                <h3><a href="#">How to Invest 5000 Rupees Monthly in 2025</a></h3>
+                <p>Starting with just ₹5,000/month? Discover the best investment strategies for building long-term wealth through SIPs, index funds, and smart portfolio allocation.</p>
+                <a href="#" class="btn btn-secondary">Read More →</a>
+            </div>
+
+            <div class="blog-post">
+                <h3><a href="#">Emergency Fund Calculator India: Complete Guide</a></h3>
+                <p>Learn why emergency funds are crucial, how much you need, and where to keep your emergency money for maximum safety and accessibility.</p>
+                <a href="#" class="btn btn-secondary">Read More →</a>
+            </div>
+
+            <div class="blog-post">
+                <h3><a href="#">Retirement Planning for 30 Year Olds</a></h3>
+                <p>You're never too young to plan retirement. Find out how much to save, best investment vehicles, and tax-saving strategies to retire comfortably.</p>
+                <a href="#" class="btn btn-secondary">Read More →</a>
+            </div>
+
+            <div class="blog-post">
+                <h3><a href="#">Best Mutual Funds India 2025</a></h3>
+                <p>Comprehensive analysis of top-performing mutual funds across categories: large cap, mid cap, small cap, and hybrid funds for different risk profiles.</p>
+                <a href="#" class="btn btn-secondary">Read More →</a>
+            </div>
+        </section>
+
+        <!-- Ad Space -->
+        <div class="ad-placeholder">
+            <div>
+                <div class="ad-label">Advertisement</div>
+                <div style="min-height: 90px; display: flex; align-items: center; justify-content: center;">
+                    <p style="margin: 0; font-size: 13px;">Google AdSense 728×90 Banner</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Newsletter Section -->
+        <section class="section" style="background: linear-gradient(135deg, rgba(var(--color-teal-500-rgb), 0.1), rgba(var(--color-teal-500-rgb), 0.05)); padding: var(--space-48) var(--space-32); border-radius: var(--radius-lg); text-align: center;">
+            <h2 style="font-size: var(--font-size-3xl); margin-bottom: var(--space-16);">📬 Stay Updated</h2>
+            <p style="color: var(--color-text-secondary); margin-bottom: var(--space-24); font-size: var(--font-size-lg);">Get weekly financial tips, market insights, and exclusive calculator updates</p>
+            <div style="max-width: 500px; margin: 0 auto; display: flex; gap: var(--space-12);">
+                <input type="email" placeholder="Enter your email" style="flex: 1;" />
+                <button class="btn btn-primary">Subscribe</button>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 WealthBuilder Hub. Built to help you achieve financial freedom.</p>
+        <p>Disclaimer: Investment is subject to market risks. Please read all scheme related documents carefully.</p>
+    </footer>
+
+    <script>
+        function calculateEmergencyFund() {
+            const expenses = parseFloat(document.getElementById('monthlyExpenses').value);
+            const months = parseInt(document.getElementById('months').value);
+            
+            if (!expenses || expenses <= 0) {
+                alert('Please enter valid monthly expenses');
+                return;
+            }
+            
+            const emergencyFund = expenses * months;
+            
+            document.getElementById('emergencyAmount').innerHTML = `
+                <strong style="font-size: 24px; color: var(--color-primary);">₹${emergencyFund.toLocaleString('en-IN')}</strong><br>
+                <span style="color: var(--color-text-secondary);">Keep this amount in a liquid fund or savings account for emergencies</span>
+            `;
+            
+            document.getElementById('emergencyResult').style.display = 'block';
+        }
+        
+        function calculateCompound() {
+            const principal = parseFloat(document.getElementById('principal').value) || 0;
+            const monthlyInvest = parseFloat(document.getElementById('monthlyInvest').value) || 0;
+            const rate = parseFloat(document.getElementById('rate').value);
+            const years = parseFloat(document.getElementById('years').value);
+            
+            if (!rate || !years || rate <= 0 || years <= 0) {
+                alert('Please enter valid rate and years');
+                return;
+            }
+            
+            const monthlyRate = rate / 100 / 12;
+            const months = years * 12;
+            
+            // Future value of initial investment
+            const fvPrincipal = principal * Math.pow(1 + monthlyRate, months);
+            
+            // Future value of monthly SIP
+            const fvSIP = monthlyInvest * ((Math.pow(1 + monthlyRate, months) - 1) / monthlyRate) * (1 + monthlyRate);
+            
+            const totalValue = fvPrincipal + fvSIP;
+            const totalInvested = principal + (monthlyInvest * months);
+            const totalGains = totalValue - totalInvested;
+            
+            document.getElementById('totalInvested').innerHTML = `<strong>Total Invested:</strong> ₹${totalInvested.toLocaleString('en-IN', {maximumFractionDigits: 0})}`;
+            document.getElementById('totalValue').innerHTML = `<strong style="font-size: 20px; color: var(--color-primary);">Final Value:</strong> <span style="font-size: 24px; color: var(--color-primary);">₹${totalValue.toLocaleString('en-IN', {maximumFractionDigits: 0})}</span>`;
+            document.getElementById('totalGains').innerHTML = `<strong>Total Gains:</strong> <span style="color: green;">₹${totalGains.toLocaleString('en-IN', {maximumFractionDigits: 0})}</span> (${((totalGains/totalInvested)*100).toFixed(1)}% return)`;
+            
+            document.getElementById('compoundResult').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
